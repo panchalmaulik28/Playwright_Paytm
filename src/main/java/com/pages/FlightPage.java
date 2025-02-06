@@ -22,23 +22,23 @@ public class FlightPage extends BrowserFactory {
 	public void searchSourceDestination(String source, String destination) {
 		page.locator(fromDD).click();
 		page.locator(sourceTxt).fill(source);
+		clickOnSourceDestinationList(source);
+		
+		page.locator(toDD).click();
+		page.locator(destinationTxt).fill(destination);
+		clickOnSourceDestinationList(destination);
+	}
+	
+	public void clickOnSourceDestinationList(String value) {
 		page.waitForSelector(placeList);
 		int placeCount = page.locator(placeList).count();
 		for (int i = 0; i <= placeCount; i++) {
-			if(page.locator(placeList).allTextContents().contains(source)) {
+			if(page.locator(placeList).allTextContents().contains(value)) {
 				page.locator(placeName).nth(i).click();	
 				break;
 			}
 		}
-		page.locator(toDD).click();
-		page.locator(destinationTxt).fill(destination);
-		page.waitForSelector(placeList);
-		for (int i = 0; i <= placeCount; i++) {
-			if(page.locator(placeList).allTextContents().contains(destination)) {
-				page.locator(placeName).nth(i).click();	
-				break;
-			}
-		}
+		
 	}
 
 }
