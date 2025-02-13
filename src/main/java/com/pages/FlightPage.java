@@ -14,31 +14,29 @@ public class FlightPage extends BrowserFactory {
 	String calender = "//span[@id='departureDate']";
 	String searchFlightBtn = "//button[@id='flightSearch']";
 
-	public void searchFlight(String source, String destination) {
-		searchSourceDestination(source,destination);
+	public void searchFlightWithSoruceDestination(String source, String destination) {
+		selectSourcDestination(source, destination);
 		page.locator(searchFlightBtn).click();
 	}
 
-	public void searchSourceDestination(String source, String destination) {
+	public void selectSourcDestination(String source, String destination) {
 		page.locator(fromDD).click();
 		page.locator(sourceTxt).fill(source);
-		clickOnSourceDestinationList(source);
-		
+		clickFromTheList(source);
+
 		page.locator(toDD).click();
 		page.locator(destinationTxt).fill(destination);
-		clickOnSourceDestinationList(destination);
-	}
-	
-	public void clickOnSourceDestinationList(String value) {
-		page.waitForSelector(placeList);
-		int placeCount = page.locator(placeList).count();
-		for (int i = 0; i <= placeCount; i++) {
-			if(page.locator(placeList).allTextContents().contains(value)) {
-				page.locator(placeName).nth(i).click();	
-				break;
-			}
-		}
-		
+		clickFromTheList(destination);
 	}
 
+	public void clickFromTheList(String value) {
+		page.waitForSelector(placeList);
+		int placeCount = page.locator(placeList).count();
+		for (int i = 0; i <= placeCount; i++)
+			if (page.locator(placeList).allTextContents().contains(value)) {
+				System.out.println("if loops"+page.locator(placeName).nth(i).textContent());
+				page.locator(placeName).nth(i).click();
+				break;
+			}
+	}
 }

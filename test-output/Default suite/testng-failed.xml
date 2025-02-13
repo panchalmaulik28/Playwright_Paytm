@@ -7,7 +7,7 @@
         <methods>
           <include name="tearDown"/>
           <include name="invokeBrowser"/>
-          <include name="launchTheApplication"/>
+          <include name="navigateToPage"/>
         </methods>
       </class> <!-- com.testcases.FlightTC -->
     </classes>
